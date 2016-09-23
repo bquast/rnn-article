@@ -434,68 +434,6 @@ Writing several lines of code:
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex Code Chunk
-status open
-
-\begin_layout Code
-
-first line of code
-\end_layout
-
-\begin_layout Code
-
-second line of code
-\end_layout
-
-\begin_layout Code
-
-third line of code
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Alternatively, you can distinguish between input and output code:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex Code Chunk
-status open
-
-\begin_layout Code Input
-
-first line of input code
-\end_layout
-
-\begin_layout Code Input
-
-second line of input code
-\end_layout
-
-\begin_layout Code Output
-
-first line of output code
-\end_layout
-
-\begin_layout Code Output
-
-second line of output code
-\end_layout
-
-\begin_layout Code Output
-
-third line of output code
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Flex Chunk
 status open
 
@@ -523,12 +461,45 @@ library(rnn)
 
 \end_layout
 
+\begin_layout Standard
+These are all the exported functions:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+list functions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ls("package:rnn")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Acknowledgments
 \end_layout
 
 \begin_layout Standard
-Here you can write some acknowledgments.
+We gratefully acknowledge support from ...
 \end_layout
 
 \begin_layout Section
