@@ -27,6 +27,9 @@
 \end_preamble
 \options article
 \use_default_options false
+\begin_modules
+knitr
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -102,7 +105,17 @@ rnn
 
 \end_inset
 
-: RNN, GRU, and LSTM in native R
+: RNN, GRU, and LSTM in native 
+\begin_inset Flex Proglang
+status open
+
+\begin_layout Plain Layout
+R
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Title
@@ -148,7 +161,17 @@ rnn
 
 \end_inset
 
-: RNN, GRU, and LSTM in native R
+: RNN, GRU, and LSTM in native 
+\begin_inset Flex Proglang
+status open
+
+\begin_layout Plain Layout
+R
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Abstract
@@ -238,7 +261,7 @@ About package
 status open
 
 \begin_layout Plain Layout
-foo
+rnn
 \end_layout
 
 \end_inset
@@ -258,7 +281,7 @@ R
 status open
 
 \begin_layout Plain Layout
-About package foo in R
+About package rnn in R
 \end_layout
 
 \end_inset
@@ -465,6 +488,34 @@ second line of output code
 \begin_layout Code Output
 
 third line of output code
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+load package
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+library(rnn)
 \end_layout
 
 \end_inset
