@@ -92,101 +92,6 @@
 
 \begin_body
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-To use the JSS codesnippet, bookreview or softwarereview styles, replace
- the option 
-\begin_inset Quotes eld
-\end_inset
-
-article
-\begin_inset Quotes erd
-\end_inset
-
- in Document\SpecialChar menuseparator
-Settings\SpecialChar menuseparator
-Document Class\SpecialChar menuseparator
-Options with 
-\begin_inset Quotes eld
-\end_inset
-
-codesnippet
-\begin_inset Quotes erd
-\end_inset
-
-, 
-\begin_inset Quotes eld
-\end_inset
-
-bookreview
-\begin_inset Quotes erd
-\end_inset
-
- or 
-\begin_inset Quotes eld
-\end_inset
-
-softwarereview
-\begin_inset Quotes erd
-\end_inset
-
- and remove/uncomment the relevant parts in the \SpecialChar LaTeX
- Preamble.
- 
-\end_layout
-
-\begin_layout Plain Layout
-If you want to use this JSS article style for a non-JSS article, replace
- the option 
-\begin_inset Quotes eld
-\end_inset
-
-article
-\begin_inset Quotes erd
-\end_inset
-
- with 
-\begin_inset Quotes eld
-\end_inset
-
-nojss
-\begin_inset Quotes erd
-\end_inset
-
-.
- This will suppress the JSS-specific parts of the layout.
-\end_layout
-
-\begin_layout Plain Layout
-To include the JSS-specific parts of the layout, the article has to be processed
- with PDF, i.
-\begin_inset space \thinspace{}
-\end_inset
-
-e.
-\begin_inset space ~
-\end_inset
-
-you cannot process it with DVI or PS.
- However, if the option 
-\begin_inset Quotes eld
-\end_inset
-
-nojss
-\begin_inset Quotes erd
-\end_inset
-
- is used, it can be processed with DVI or PS.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Title
 \begin_inset Flex Pkg
 status open
@@ -226,21 +131,11 @@ Dimitri Fichou
 \begin_inset Newline newline
 \end_inset
 
-Plus Affiliation
+University of Giessen
 \end_layout
 
 \begin_layout Plain Author
-Achim Zeileis, Second Author
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-optional
-\end_layout
-
-\end_inset
-
-
+Bastiaan Quast, Dimitri Fichou
 \end_layout
 
 \begin_layout Short Title
@@ -248,22 +143,12 @@ optional
 status open
 
 \begin_layout Plain Layout
-foo
+rnn
 \end_layout
 
 \end_inset
 
-: A Capitalized Title
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-only if necessary
-\end_layout
-
-\end_inset
-
-
+: RNN, GRU, and LSTM in native R
 \end_layout
 
 \begin_layout Abstract
@@ -278,22 +163,13 @@ e abstract of the article.The abstract of the article.The abstract of the
 \end_layout
 
 \begin_layout Keywords
-keywords, comma-separated, not capitalized, 
+Recurrent Neural Network, Gated Recurrent Unit, Long Short-Term Memory,
+ 
 \begin_inset Flex Proglang
 status open
 
 \begin_layout Plain Layout
-Java
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-at least one keyword must be supplied
+R
 \end_layout
 
 \end_inset
@@ -301,28 +177,29 @@ at least one keyword must be supplied
 
 \end_layout
 
-\begin_layout Plain Keywords
-keyword 1, keyword 2, foo, R
+\begin_layout Keywords
+Recurrent Neural Network, Gated Recurrent Unit, Long Short-Term Memory,
+ R
 \end_layout
 
 \begin_layout Address
-Achim Zeileis
+Bastiaan Quast
 \begin_inset Newline newline
 \end_inset
 
-Department of Statistics and Mathematics
+Department of International Economics
 \begin_inset Newline newline
 \end_inset
 
-Faculty of Economics and Statistics
+The Graduate Institute, Geneva
 \begin_inset Newline newline
 \end_inset
 
-Universität Innsbruck
+Maison de la paix
 \begin_inset Newline newline
 \end_inset
 
-6020 Innsbruck, Austria
+1201 Geneva
 \begin_inset Newline newline
 \end_inset
 
@@ -332,7 +209,7 @@ status open
 
 \begin_layout Plain Layout
 
-Achim.Zeileis@uibk.ac.at
+bastiaan.quast@graduateinstitute.ch
 \end_layout
 
 \end_inset
@@ -347,26 +224,7 @@ status open
 
 \begin_layout Plain Layout
 
-http://eeecon.uibk.ac.at/~zeileis/
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-It is also possible to add a telephone and fax number before the e-mail
- in the following format:
-\begin_inset Newline newline
-\end_inset
-
-Telephone: +43/512/507-7103
-\end_layout
-
-\begin_layout Plain Layout
-Fax: +43/512/507-2851
+http://qua.st/
 \end_layout
 
 \end_inset
