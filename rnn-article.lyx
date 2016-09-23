@@ -327,7 +327,7 @@ R
 status open
 
 \begin_layout Plain Layout
-foo
+rnn
 \end_layout
 
 \end_inset
@@ -337,7 +337,7 @@ foo
 status open
 
 \begin_layout Plain Layout
-foo
+rnn
 \end_layout
 
 \end_inset
@@ -443,7 +443,7 @@ status open
 status open
 
 \begin_layout Plain Layout
-load package
+load-package
 \end_layout
 
 \end_inset
@@ -476,7 +476,7 @@ status open
 
 \begin_layout Plain Layout
 
-list functions
+list-functions
 \end_layout
 
 \end_inset
@@ -487,6 +487,77 @@ list functions
 \begin_layout Plain Layout
 
 ls("package:rnn")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and now including the non-exported:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+list-all-functions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ls(getNamespace("rnn"), all.names=TRUE)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Internals
+\end_layout
+
+\begin_layout Standard
+We can show the code of a function as such (note that we can just remove
+ them and add their definitions to the example code):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+i2b-code
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+int2bin
 \end_layout
 
 \end_inset
