@@ -82,9 +82,11 @@ logicalmkup
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine natbib
+\cite_engine biblatex
 \cite_engine_type authoryear
 \biblio_style plainnat
+\biblatex_bibstyle authoryear
+\biblatex_citestyle authoryear
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -437,13 +439,11 @@ sigmoid
 
 \end_inset
 
- package
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-cite
-\end_layout
+ package 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "quast2016sigmoid"
+literal "false"
 
 \end_inset
 
@@ -582,12 +582,55 @@ literal "false"
 \end_layout
 
 \begin_layout Section
-Internals
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+trainr
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-We can show the code of a function as such (note that we can just remove
- them and add their definitions to the example code):
+The workhorse of the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+rnn
+\end_layout
+
+\end_inset
+
+ package is the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+trainr()
+\end_layout
+
+\end_inset
+
+ function, it trains a model based on input and output data, given the specified
+ hyperparameters.
+\end_layout
+
+\begin_layout Standard
+The documentation of the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+trainr()
+\end_layout
+
+\end_inset
+
+ function can be called up using:
 \end_layout
 
 \begin_layout Standard
@@ -601,7 +644,7 @@ status open
 
 \begin_layout Plain Layout
 
-i2b-code
+help_trainr, eval=FALSE
 \end_layout
 
 \end_inset
@@ -611,7 +654,436 @@ i2b-code
 
 \begin_layout Plain Layout
 
+help('trainr')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Recurrent Neural Networks have the ability to learn bit-by-bit binary addition
+ (including carrying over) with as little as 3 hidden nodes, whereas feed-forwar
+d neural networks would need many more.
+\end_layout
+
+\begin_layout Standard
+First training data is generated, the training data is between 0-127, or
+ an 8-bit binary.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+training-input
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+X1 = sample(0:127, 7000, replace=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+X2 = sample(0:127, 7000, replace=TRUE)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The training data is used to generate the output data or labels.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+training-output
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Y <- X1 + X2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Following this, both the input data and the output data are converted into
+ binary format, using the built-in 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+int2bin()
+\end_layout
+
+\end_inset
+
+ function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
 int2bin
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+X1 <- int2bin(X1, length=8)
+\end_layout
+
+\begin_layout Plain Layout
+
+X2 <- int2bin(X2, length=8)
+\end_layout
+
+\begin_layout Plain Layout
+
+Y  <- int2bin(Y,  length=8)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, the two input variables are stored in a single 3 dimensional tensor.
+ Where the first dimension contains observations, the second dimension time,
+ and the third dimension variables.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+tensor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+X <- array( c(X1,X2), dim=c(dim(X1),2) )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The objects 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Y
+\end_layout
+
+\end_inset
+
+ can now be fed to the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+trainr()
+\end_layout
+
+\end_inset
+
+ function, which will output a trained model (stored here in the object
+ called 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+m1
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+train
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+m1 <- trainr(Y=Y,
+\end_layout
+
+\begin_layout Plain Layout
+
+             X=X,
+\end_layout
+
+\begin_layout Plain Layout
+
+             learningrate   = 0.1,
+\end_layout
+
+\begin_layout Plain Layout
+
+             hidden_dim     = 3   )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+predictr
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using a trained model to make predictions is done using the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+predictr()
+\end_layout
+
+\end_inset
+
+ function.
+\end_layout
+
+\begin_layout Standard
+Take the first two observation of the trainig data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+testing
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+X[1:2,,]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Observation 1; variables 1 & 2 in decimal format.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+testing-decimal
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+bin2int( X[1:2,,] )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Make predictions using the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+predictr()
+\end_layout
+
+\end_inset
+
+ function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+predict
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+round( predictr(model = m1,
+\end_layout
+
+\begin_layout Plain Layout
+
+                X     = X[1:2,,] ) )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Compared to the ground truth values.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+ground-truth
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Y[1:2,]
 \end_layout
 
 \end_inset
@@ -627,6 +1099,18 @@ Acknowledgments
 Bastiaan Quast gratefully acknowledges support from the Swiss National Science
  Foundation under grant # (2013-2015).
  Dimitri Fichoou gratefully acknowledges support ...
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "rnn-article"
+options "plainnat"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
