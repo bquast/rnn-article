@@ -57,7 +57,19 @@ logicalmkup
 \float_alignment class
 \paperfontsize default
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_title "rnn: Recurrent Neural Network architectures in native R"
+\pdf_author "Bastiaan Quast"
+\pdf_keywords "recurrent neural network, R package, R language"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry false
 \use_package amsmath 1
@@ -158,13 +170,43 @@ University of Giessen
 
 \begin_layout Abstract
 \noindent
-The abstract of the article.
- The abstract of the article.The abstract of the article.The abstract of the
- article.The abstract of the article.The abstract of the article.The abstract
- of the article.The abstract of the article.The abstract of the article.The
- abstract of the article.The abstract of the article.The abstract of the article.Th
-e abstract of the article.The abstract of the article.The abstract of the
- article.The abstract of the article.The abstract of the article.
+The R package 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+rnn
+\end_layout
+
+\end_inset
+
+ implements several Recurrent Neural Network (RNN) architectures in the
+ R language.
+ The native 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+R
+\end_layout
+
+\end_inset
+
+ implementations of these architectures allow scientists familiar with the
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+R
+\end_layout
+
+\end_inset
+
+ language, to develop an intuitive understanding of these architectures,
+ something which is not possible with production frameworks, such as TensorFlow,
+ PyTorch or CNTK.
+ 
 \end_layout
 
 \begin_layout Section
@@ -192,7 +234,66 @@ R
 \end_layout
 
 \begin_layout Standard
-Writing several lines of code:
+The 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+rnn
+\end_layout
+
+\end_inset
+
+ package is available on 
+\begin_inset CommandInset href
+LatexCommand href
+name "CRAN"
+target "https://cran.r-project.org/"
+literal "false"
+
+\end_inset
+
+ at 
+\begin_inset CommandInset href
+LatexCommand href
+target "https://cran.r-project.org/package=rnn"
+
+\end_inset
+
+ and can be installed using:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+install, eval=FALSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+install.packages('rnn')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After installation, the package can be loaded using:
 \end_layout
 
 \begin_layout Standard
@@ -225,7 +326,7 @@ library(rnn)
 \end_layout
 
 \begin_layout Standard
-These are all the exported functions:
+A list of all the exported functions can be printed using:
 \end_layout
 
 \begin_layout Standard
@@ -249,7 +350,7 @@ list-functions
 
 \begin_layout Plain Layout
 
-ls("package:rnn")
+ls('package:rnn')
 \end_layout
 
 \end_inset
@@ -258,7 +359,8 @@ ls("package:rnn")
 \end_layout
 
 \begin_layout Standard
-and now including the non-exported:
+A list of all the functions - including non-exported ones - can be printed
+ using:
 \end_layout
 
 \begin_layout Standard
@@ -282,12 +384,141 @@ list-all-functions
 
 \begin_layout Plain Layout
 
-ls(getNamespace("rnn"), all.names=TRUE)
+ls(getNamespace('rnn'), all.names=TRUE)
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+rnn
+\end_layout
+
+\end_inset
+
+ has one dependency, the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+sigmoid
+\end_layout
+
+\end_inset
+
+ package
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+cite
+\end_layout
+
+\end_inset
+
+, which is on 
+\begin_inset CommandInset href
+LatexCommand href
+name "CRAN"
+target "https://cran.r-project.org/"
+literal "false"
+
+\end_inset
+
+ at 
+\begin_inset CommandInset href
+LatexCommand href
+target "https://cran.r-project.org/package=sigmoid"
+
+\end_inset
+
+.
+ The 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+sigmoid
+\end_layout
+
+\end_inset
+
+ package provides a collection of sigmoid functions such as the Rectified
+ Linear Unit (ReLU)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+link somewhere on CRAN? maybe update vignette to include sections
+\end_layout
+
+\end_inset
+
+, Gompertz, etc.
+ Until version 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+0.8.0
+\end_layout
+
+\end_inset
+
+ of the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+rnn
+\end_layout
+
+\end_inset
+
+ package, the sigmoid functions were included in the package, after which
+ they were released as a separate package for more general use.
+\end_layout
+
+\begin_layout Standard
+In addition to this, the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+rnn
+\end_layout
+
+\end_inset
+
+ package includes a 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Shiny
+\end_layout
+
+\end_inset
+
+ app demonstrating a Recurrent Neural Network analysis of a time series
+ (Foreign Exchange rates).
+ In order to run the app locally, the 
+\begin_inset CommandInset href
+LatexCommand href
+name "Shiny package"
+target "https://cran.r-project.org/package=shiny"
+literal "false"
+
+\end_inset
+
+ needs to be installed.
 \end_layout
 
 \begin_layout Section
@@ -333,24 +564,9 @@ Acknowledgments
 \end_layout
 
 \begin_layout Standard
-We gratefully acknowledge support from ...
-\end_layout
-
-\begin_layout Section
-\start_of_appendix
-This is the first appendix section
-\end_layout
-
-\begin_layout Subsection
-A subsection
-\end_layout
-
-\begin_layout Subsubsection
-A subsubsection
-\end_layout
-
-\begin_layout Standard
-some text
+Bastiaan Quast gratefully acknowledges support from the Swiss National Science
+ Foundation under grant # (2013-2015).
+ Dimitri Fichoou gratefully acknowledges support ...
 \end_layout
 
 \end_body
