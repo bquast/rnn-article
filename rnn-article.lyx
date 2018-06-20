@@ -209,6 +209,30 @@ R
  
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+fix 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://qua.st/rnn"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+fix Digital Ocean droplet, setup demo again
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 About package 
 \begin_inset Flex Code
@@ -451,17 +475,43 @@ sigmoid
 \end_inset
 
  package provides a collection of sigmoid functions such as the Rectified
- Linear Unit (ReLU)
-\begin_inset Note Note
+ Linear Unit (
+\begin_inset Flex Code
 status open
 
 \begin_layout Plain Layout
-link somewhere on CRAN? maybe update vignette to include sections
+\begin_inset CommandInset href
+LatexCommand href
+name "ReLU()"
+target "https://cran.r-project.org/web/packages/sigmoid/vignettes/sigmoid.html#relu"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
-, Gompertz, etc.
+), 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "Gompertz()"
+target "https://cran.r-project.org/web/packages/sigmoid/vignettes/sigmoid.html#gompertz"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, etc.
  Until version 
 \begin_inset Flex Code
 status open
@@ -507,8 +557,18 @@ Shiny
 
 \end_inset
 
- app demonstrating a Recurrent Neural Network analysis of a time series
- (Foreign Exchange rates).
+ app
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+need to remove as dependency
+\end_layout
+
+\end_inset
+
+ demonstrating a Recurrent Neural Network analysis of a time series (Foreign
+ Exchange rates).
  In order to run the app locally, the 
 \begin_inset CommandInset href
 LatexCommand href
