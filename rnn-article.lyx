@@ -114,7 +114,11 @@ rnn
 
 \end_inset
 
-: RNN, GRU, and LSTM in native 
+: Recurrent Neural Network architectures
+\begin_inset Newline newline
+\end_inset
+
+in native 
 \begin_inset Flex Code
 status open
 
