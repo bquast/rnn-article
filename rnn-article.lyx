@@ -286,7 +286,27 @@ target "https://cran.r-project.org/package=rnn"
 
 \end_inset
 
- and can be installed using:
+ and can be installed using
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The development version can be installed using 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+devtools::install_github('bquast/rnn')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
@@ -699,12 +719,16 @@ set.seed(123) # for reproducible random numbers
 
 \begin_layout Plain Layout
 
-X1 = sample(0:127, 7000, replace=TRUE)
+X1 = sample(0:127, 50000, replace=TRUE)
 \end_layout
 
 \begin_layout Plain Layout
 
-X2 = sample(0:127, 7000, replace=TRUE)
+X2 = sample(0:127, 50000, replace=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -738,6 +762,10 @@ training-output
 \begin_layout Plain Layout
 
 Y <- X1 + X2
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -794,6 +822,10 @@ X2 <- int2bin(X2, length=8)
 Y  <- int2bin(Y,  length=8)
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
 
@@ -827,6 +859,10 @@ tensor
 \begin_layout Plain Layout
 
 X <- array( c(X1,X2), dim=c(dim(X1),2) )
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -890,7 +926,7 @@ status open
 
 \begin_layout Plain Layout
 
-train
+train, cache=TRUE
 \end_layout
 
 \end_inset
@@ -910,20 +946,21 @@ m1 <- trainr(Y=Y,
 
 \begin_layout Plain Layout
 
-             learningrate   = 0.1,
+             learningrate   = 1,
 \end_layout
 
 \begin_layout Plain Layout
 
-             hidden_dim     = 3   )
+             hidden_dim     = 6   )
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section
 \begin_inset Flex Code
 status open
 
@@ -1173,6 +1210,189 @@ Y[1:2,]
 
 \end_layout
 
+\begin_layout Standard
+Or in decimal format.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+predict-dec
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+bin2int(round( predictr(model = m1,
+\end_layout
+
+\begin_layout Plain Layout
+
+                        X     = X[1:2,,] ) ) )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Compared to the ground truth values.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+ground-truth-dec
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+bin2int( Y[1:2,] )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Architectures
+\end_layout
+
+\begin_layout Standard
+In addition to fully-connected Recurrent Neural Networks, 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+rnn
+\end_layout
+
+\end_inset
+
+ also supports Long Short-Term Memory (LSTM) Recurrent Neural Networks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hochreiter1997long"
+literal "false"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+lstm, eval=FALSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+trainr(Y, X, network_type=
+\begin_inset Quotes erd
+\end_inset
+
+lstm
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+as well as Gated Recurrent Unit 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "cho2014learning"
+literal "false"
+
+\end_inset
+
+ architectures.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+gru, eval=FALSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+trainr(Y, X, network_type=
+\begin_inset Quotes erd
+\end_inset
+
+gru
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Acknowledgments
 \end_layout
@@ -1181,6 +1401,73 @@ Acknowledgments
 Bastiaan Quast gratefully acknowledges support from the Swiss National Science
  Foundation under grant # (2013-2015).
  Dimitri Fichoou gratefully acknowledges support ...
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hebb2005organization"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "linnainmaa1970representation"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "mcculloch1943logical"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "minsky1952neural"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "rosenblatt1958perceptron"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "rumelhart1986learning"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "werbos1974beyond"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "widrow1960adaptive"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
