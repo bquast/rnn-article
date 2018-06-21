@@ -145,3 +145,4 @@ TSWLatexianTemp*
 *.lyx~
 .Rproj.user
 cache
+.Rhistory
