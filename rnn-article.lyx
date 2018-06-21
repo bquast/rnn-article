@@ -683,12 +683,18 @@ status open
 status open
 
 \begin_layout Plain Layout
+
 training-input
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+
+set.seed(123) # for reproducible random numbers
 \end_layout
 
 \begin_layout Plain Layout
@@ -945,7 +951,7 @@ predictr()
 \end_layout
 
 \begin_layout Standard
-Take the first two observation of the trainig data.
+Take the first two observation of the training data, the first input variable.
 \end_layout
 
 \begin_layout Standard
@@ -959,7 +965,7 @@ status open
 
 \begin_layout Plain Layout
 
-testing
+testing1
 \end_layout
 
 \end_inset
@@ -969,7 +975,7 @@ testing
 
 \begin_layout Plain Layout
 
-X[1:2,,]
+X[1:2,,1]
 \end_layout
 
 \end_inset
@@ -978,7 +984,7 @@ X[1:2,,]
 \end_layout
 
 \begin_layout Standard
-Observation 1; variables 1 & 2 in decimal format.
+Observation 1 & 2; variable 1 in decimal format.
 \end_layout
 
 \begin_layout Standard
@@ -992,7 +998,7 @@ status open
 
 \begin_layout Plain Layout
 
-testing-decimal
+testing1-decimal
 \end_layout
 
 \end_inset
@@ -1002,12 +1008,88 @@ testing-decimal
 
 \begin_layout Plain Layout
 
-bin2int( X[1:2,,] )
+bin2int( X[1:2,,1] )
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Take the first two observation of the training data, the second input variable.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+testing2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+X[1:2,,2]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Observation 1 & 2; variable 2 in decimal format.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+testing2-decimal
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+bin2int( X[1:2,,2] )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Summing observation 1 of variable 1: 36, with observation 1 of variable
+ 2: 119, gives 155.
+\end_layout
+
+\begin_layout Standard
+Summing observation 2 of variable 1: 100, with observation 2 of variable
+ 2: 75, gives 175.
 \end_layout
 
 \begin_layout Standard
