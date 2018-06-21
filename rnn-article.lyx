@@ -601,16 +601,7 @@ literal "false"
 \end_layout
 
 \begin_layout Section
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
 trainr()
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -944,16 +935,10 @@ m1 <- trainr(Y=Y,
 \end_inset
 
 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-predictr
 \end_layout
 
-\end_inset
-
-
+\begin_layout Section
+predictr()
 \end_layout
 
 \begin_layout Standard
@@ -971,7 +956,37 @@ predictr()
 \end_layout
 
 \begin_layout Standard
-Take the first two observation of the training data, the first input variable.
+Observations 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+ of the training data, the variable 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+, in binary format.
 \end_layout
 
 \begin_layout Standard
@@ -1004,7 +1019,37 @@ X[1:2,,1]
 \end_layout
 
 \begin_layout Standard
-Observation 1 & 2; variable 1 in decimal format.
+The same observations 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+; variable 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+, this time in decimal format.
 \end_layout
 
 \begin_layout Standard
@@ -1037,7 +1082,37 @@ bin2int( X[1:2,,1] )
 \end_layout
 
 \begin_layout Standard
-Take the first two observation of the training data, the second input variable.
+Observations 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+ of the training data, the input variable 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+, in binary format.
 \end_layout
 
 \begin_layout Standard
@@ -1070,7 +1145,37 @@ X[1:2,,2]
 \end_layout
 
 \begin_layout Standard
-Observation 1 & 2; variable 2 in decimal format.
+Observations 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+; variable 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+, in decimal format.
 \end_layout
 
 \begin_layout Standard
@@ -1103,7 +1208,27 @@ bin2int( X[1:2,,2] )
 \end_layout
 
 \begin_layout Standard
-Summing observation 1 of variable 1: 
+Summing observation 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+ of variable 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+: 
 \begin_inset Flex Code
 status open
 
@@ -1113,7 +1238,27 @@ status open
 
 \end_inset
 
-, with observation 1 of variable 2: 
+, with observation 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+ of variable 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+: 
 \begin_inset Flex Code
 status open
 
@@ -1137,7 +1282,27 @@ status open
 \end_layout
 
 \begin_layout Standard
-Summing observation 2 of variable 1: 
+Summing observation 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+ of variable 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+
+: 
 \begin_inset Flex Code
 status open
 
@@ -1147,7 +1312,27 @@ status open
 
 \end_inset
 
-, with observation 2 of variable 2: 
+, with observation 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+ of variable 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+
+: 
 \begin_inset Flex Code
 status open
 
@@ -1394,7 +1579,7 @@ literal "false"
 
 \end_inset
 
- architectures.
+ architecture.
 \end_layout
 
 \begin_layout Standard
@@ -1434,6 +1619,146 @@ gru
 
 \end_layout
 
+\begin_layout Section
+Miscellaneous
+\end_layout
+
+\begin_layout Standard
+In addition to the main user APIs 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+trainr()
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+predictr()
+\end_layout
+
+\end_inset
+
+, the underlying functions for the above mentioned neural network architectures,
+ the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+rnn
+\end_layout
+
+\end_inset
+
+ package includes several other functions.
+ Including the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+int2bin()
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+bin2int()
+\end_layout
+
+\end_inset
+
+ which were used above, these funtions are intended to ease conversion from
+ decimal to binary notation and visa versa, especially for didacting purposes.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+run.rnn_demo()
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+run.finance_demo()
+\end_layout
+
+\end_inset
+
+ each launch a 
+\begin_inset CommandInset href
+LatexCommand href
+name "Shiny app"
+target "http://shiny.rstudio.com/"
+literal "false"
+
+\end_inset
+
+ that demonstate usage of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+rnn
+\end_layout
+
+\end_inset
+
+ functionality, the Shiny package needs to be installed in order to run
+ these apps locally
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The Shiny package can be installed using: 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+install.packages('shiny')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ The two demos are also available online at 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://shiny.qua.st/rnn"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://shiny.qua.st/finance"
+
+\end_inset
+
+ respectively.
+\end_layout
+
 \begin_layout Section*
 Acknowledgments
 \end_layout
@@ -1441,7 +1766,7 @@ Acknowledgments
 \begin_layout Standard
 Bastiaan Quast gratefully acknowledges support from the Swiss National Science
  Foundation under grant # (2013-2015).
- Dimitri Fichoou gratefully acknowledges support ...
+ Dimitri Fichou gratefully acknowledges support ...
 \end_layout
 
 \begin_layout Standard
