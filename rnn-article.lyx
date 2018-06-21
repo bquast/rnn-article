@@ -372,7 +372,7 @@ library(rnn)
 \end_layout
 
 \begin_layout Standard
-A list of all the exported functions can be printed using:
+The following functions are exported by the package.
 \end_layout
 
 \begin_layout Standard
@@ -405,8 +405,7 @@ ls('package:rnn')
 \end_layout
 
 \begin_layout Standard
-A list of all the functions - including non-exported ones - can be printed
- using:
+A list of all the functions - including non-exported ones - is shown below.
 \end_layout
 
 \begin_layout Standard
@@ -449,7 +448,7 @@ rnn
 
 \end_inset
 
- has one dependency, the 
+ package has one dependency, the 
 \begin_inset Flex Code
 status open
 
@@ -606,7 +605,7 @@ literal "false"
 status open
 
 \begin_layout Plain Layout
-trainr
+trainr()
 \end_layout
 
 \end_inset
@@ -704,7 +703,7 @@ status open
 
 \begin_layout Plain Layout
 
-training-input
+training-input, cache=TRUE
 \end_layout
 
 \end_inset
@@ -727,10 +726,6 @@ X1 = sample(0:127, 50000, replace=TRUE)
 X2 = sample(0:127, 50000, replace=TRUE)
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -751,7 +746,7 @@ status open
 
 \begin_layout Plain Layout
 
-training-output
+training-output, cache=TRUE
 \end_layout
 
 \end_inset
@@ -762,10 +757,6 @@ training-output
 \begin_layout Plain Layout
 
 Y <- X1 + X2
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -799,7 +790,7 @@ status open
 
 \begin_layout Plain Layout
 
-int2bin
+int2bin, cache=TRUE
 \end_layout
 
 \end_inset
@@ -820,10 +811,6 @@ X2 <- int2bin(X2, length=8)
 \begin_layout Plain Layout
 
 Y  <- int2bin(Y,  length=8)
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -848,7 +835,7 @@ status open
 
 \begin_layout Plain Layout
 
-tensor
+tensor, cache=TRUE
 \end_layout
 
 \end_inset
@@ -859,10 +846,6 @@ tensor
 \begin_layout Plain Layout
 
 X <- array( c(X1,X2), dim=c(dim(X1),2) )
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -1120,13 +1103,71 @@ bin2int( X[1:2,,2] )
 \end_layout
 
 \begin_layout Standard
-Summing observation 1 of variable 1: 36, with observation 1 of variable
- 2: 119, gives 155.
+Summing observation 1 of variable 1: 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+36
+\end_layout
+
+\end_inset
+
+, with observation 1 of variable 2: 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+119
+\end_layout
+
+\end_inset
+
+, gives 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+155
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Summing observation 2 of variable 1: 100, with observation 2 of variable
- 2: 75, gives 175.
+Summing observation 2 of variable 1: 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+
+, with observation 2 of variable 2: 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+75
+\end_layout
+
+\end_inset
+
+, gives 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+175
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
