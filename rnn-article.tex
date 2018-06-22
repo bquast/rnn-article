@@ -1,0 +1,688 @@
+\batchmode
+\makeatletter
+\def\input@path{{/home/bquast/rnn-article/}}
+\makeatother
+\documentclass[english,article]{article}\usepackage[]{graphicx}\usepackage[]{color}
+\pdfoutput=1
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\usepackage{cprotect}
+\usepackage[authoryear]{natbib}
+\usepackage[unicode=true,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{pdftitle={rnn: Recurrent Neural Network architectures in native R},
+ pdfauthor={Bastiaan Quast},
+ pdfkeywords={recurrent neural network, R package, R language}}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\providecommand*{\code}[1]{\texttt{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%the following commands are used only for book or software reviews
+
+%\Reviewer{Some Author\\University of Somewhere}
+%\Plainreviewer{Some Author}
+
+%the following commands are used for articles, codesnippets, book reviews and software reviews
+
+%publication information
+%do not use these commands before the article has been accepted
+%\Volume{00}
+%\Issue{0}
+%\Month{Month}
+%\Year{2000}
+%\Submitdate{2000-00-00}
+%\Acceptdate{2000-00-00}
+
+%if you use Sweave,  include the following line (with % symbols):
+%% need no \usepackage{Sweave.sty}
+
+\makeatother
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\title{\code{rnn}: Recurrent Neural Network architectures\\
+in native \code{R}}
+\author{Bastiaan Quast\thanks{Research supported by the Swiss National Science Foundation}\\
+International Telecommuniation Union \and Dimitri Fichou\\
+University of Giessen}
+\maketitle
+\begin{abstract}
+\noindent The R package \code{rnn} implements several Recurrent Neural
+Network (RNN) architectures in the R language. The native \code{R}
+implementations of these architectures allow scientists familiar with
+the \code{R} language, to develop an intuitive understanding of these
+architectures, something which is not possible with production frameworks,
+such as TensorFlow, PyTorch or CNTK. 
+\end{abstract}
+
+
+\section{About package \protect\code{rnn} in \protect\code{R} }
+
+The \code{rnn} package is available on \href{https://cran.r-project.org/}{CRAN}
+at \href{https://cran.r-project.org/package\%3Drnn}{https://cran.r-project.org/package=rnn}
+and can be installed using\footnote{The development version can be installed using \code{devtools::install\_github('bquast/rnn')}}:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{install.packages}\hlstd{(}\hlstr{'rnn'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+After installation, the package can be loaded using:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(rnn)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The following functions are exported by the package.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ls}\hlstd{(}\hlstr{'package:rnn'}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "bin2int"          "epoch_annealing"  "epoch_print"     
+## [4] "int2bin"          "loss_L1"          "predictr"        
+## [7] "run.finance_demo" "run.rnn_demo"     "trainr"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+A list of all the functions - including non-exported ones - is shown
+below.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ls}\hlstd{(}\hlkwd{getNamespace}\hlstd{(}\hlstr{'rnn'}\hlstd{),} \hlkwc{all.names}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##  [1] ".__NAMESPACE__."      ".__S3MethodsTable__." ".packageName"        
+##  [4] "b2i"                  "backprop_gru"         "backprop_lstm"       
+##  [7] "backprop_r"           "backprop_rnn"         "bin2int"             
+## [10] "clean_lstm"           "clean_r"              "clean_rnn"           
+## [13] "epoch_annealing"      "epoch_print"          "i2b"                 
+## [16] "init_gru"             "init_lstm"            "init_r"              
+## [19] "init_rnn"             "int2bin"              "loss_L1"             
+## [22] "predict_gru"          "predict_lstm"         "predict_rnn"         
+## [25] "predictr"             "run.finance_demo"     "run.rnn_demo"        
+## [28] "trainr"               "update_adagrad"       "update_r"            
+## [31] "update_sgd"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The \code{rnn} package has one dependency, the \code{sigmoid} package
+\citep{quast2016sigmoid}, which is on \href{https://cran.r-project.org/}{CRAN}
+at \href{https://cran.r-project.org/package\%3Dsigmoid}{https://cran.r-project.org/package=sigmoid}.
+The \code{sigmoid} package provides a collection of sigmoid functions
+such as the Rectified Linear Unit (\code{\href{https://cran.r-project.org/web/packages/sigmoid/vignettes/sigmoid.html\#relu}{ReLU()}}),
+\code{\href{https://cran.r-project.org/web/packages/sigmoid/vignettes/sigmoid.html\#gompertz}{Gompertz()}},
+etc. Until version \code{0.8.0} of the \code{rnn} package, the sigmoid
+functions were included in the package, after which they were released
+as a separate package for more general use.
+
+In addition to this, the \code{rnn} package includes a \code{Shiny}
+app demonstrating a Recurrent Neural Network analysis of a time series
+(Foreign Exchange rates). In order to run the app locally, the \href{https://cran.r-project.org/package\%3Dshiny}{Shiny package}
+needs to be installed.
+
+\section{trainr()}
+
+The workhorse of the \code{rnn} package is the \code{trainr()} function,
+it trains a model based on input and output data, given the specified
+hyperparameters.
+
+The documentation of the \code{trainr()} function can be called up
+using:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{help}\hlstd{(}\hlstr{'trainr'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Recurrent Neural Networks \citep{werbos1988generalization} have the
+ability to learn bit-by-bit binary addition (including carrying over)
+with as little as 3 hidden nodes, whereas feed-forward neural networks
+would need many more.
+
+First training data is generated, the training data is between 0-127,
+or an 8-bit binary.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)} \hlcom{# for reproducible random numbers}
+\hlstd{X1} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{127}\hlstd{,} \hlnum{50000}\hlstd{,} \hlkwc{replace}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlstd{X2} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{127}\hlstd{,} \hlnum{50000}\hlstd{,} \hlkwc{replace}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The training data is used to generate the output data or labels.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Y} \hlkwb{<-} \hlstd{X1} \hlopt{+} \hlstd{X2}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Following this, both the input data and the output data are converted
+into binary format, using the built-in \code{int2bin()} function.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X1} \hlkwb{<-} \hlkwd{int2bin}\hlstd{(X1,} \hlkwc{length}\hlstd{=}\hlnum{8}\hlstd{)}
+\hlstd{X2} \hlkwb{<-} \hlkwd{int2bin}\hlstd{(X2,} \hlkwc{length}\hlstd{=}\hlnum{8}\hlstd{)}
+\hlstd{Y}  \hlkwb{<-} \hlkwd{int2bin}\hlstd{(Y,}  \hlkwc{length}\hlstd{=}\hlnum{8}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Finally, the two input variables are stored in a single 3 dimensional
+tensor. Where the first dimension contains observations, the second
+dimension time, and the third dimension variables.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X} \hlkwb{<-} \hlkwd{array}\hlstd{(} \hlkwd{c}\hlstd{(X1,X2),} \hlkwc{dim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlkwd{dim}\hlstd{(X1),}\hlnum{2}\hlstd{) )}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The objects \code{X} and \code{Y} can now be fed to the \code{trainr()}
+function, which will output a trained model (stored here in the object
+called \code{m1}).
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{m1} \hlkwb{<-} \hlkwd{trainr}\hlstd{(}\hlkwc{Y}\hlstd{=Y,}
+             \hlkwc{X}\hlstd{=X,}
+             \hlkwc{learningrate}   \hlstd{=} \hlnum{1}\hlstd{,}
+             \hlkwc{hidden_dim}     \hlstd{=} \hlnum{6}   \hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Trained epoch: 1 - Learning rate: 1}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Epoch error: 0.194449702806897}}\end{kframe}
+\end{knitrout}
+
+The forward and back propagation algorithms used are relatively straightforward
+and can be printed.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{rnn}\hlopt{:::}\hlstd{predict_rnn}
+\hlstd{rnn}\hlopt{:::}\hlstd{backprop_rnn}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+A simplied version of the rnn algorithm used is presented in the vignette
+\code{basic\_rnn}, also available on CRAN at \href{https://cran.r-project.org/package\%3Drnn/vignettes/basic_rnn.html}{https://cran.r-project.org/package=rnn/vignettes/basic\_rnn.html},
+it is also included in Appendix \ref{sec:Simplied-RNN-code}.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{vignette}\hlstd{(}\hlstr{'basic_rnn'}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\section{predictr()}
+
+Using a trained model to make predictions is done using the \code{predictr()}
+function.
+
+Observations \code{1} \& \code{2} of the training data, the variable
+\code{1}, in binary format.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X[}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{,,}\hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]    0    0    1    0    0    1    0    0
+## [2,]    0    0    1    0    0    1    1    0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The same observations \code{1} \& \code{2}; variable \code{1},
+this time in decimal format.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{bin2int}\hlstd{( X[}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{,,}\hlnum{1}\hlstd{] )}
+\end{alltt}
+\begin{verbatim}
+## [1]  36 100
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Observations \code{1} \& \code{2} of the training data, the input
+variable \code{2}, in binary format.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{X[}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{,,}\hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]    1    1    0    1    1    0    0    0
+## [2,]    0    0    0    1    1    1    0    0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Observations \code{1} \& \code{2}; variable \code{2}, in decimal
+format.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{bin2int}\hlstd{( X[}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{,,}\hlnum{2}\hlstd{] )}
+\end{alltt}
+\begin{verbatim}
+## [1] 27 56
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Summing observation \code{1} of variable \code{1}: \code{36}, with
+observation \code{1} of variable \code{2}: \code{119}, gives \code{155}.
+
+Summing observation \code{2} of variable \code{1}: \code{100},
+with observation \code{2} of variable \code{2}: \code{75}, gives
+\code{175}.
+
+Make predictions using the \code{predictr()} function.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{round}\hlstd{(} \hlkwd{predictr}\hlstd{(}\hlkwc{model} \hlstd{= m1,}
+                \hlkwc{X}     \hlstd{= X[}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{,,] ) )}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]    1    1    1    1    1    1    0    0
+## [2,]    0    0    1    1    1    0    0    1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Compared to the ground truth values.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{Y[}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{,]}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]    1    1    1    1    1    1    0    0
+## [2,]    0    0    1    1    1    0    0    1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Or in decimal format.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{bin2int}\hlstd{(}\hlkwd{round}\hlstd{(} \hlkwd{predictr}\hlstd{(}\hlkwc{model} \hlstd{= m1,}
+                        \hlkwc{X}     \hlstd{= X[}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{,,] ) ) )}
+\end{alltt}
+\begin{verbatim}
+## [1]  63 156
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Compared to the ground truth values.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{bin2int}\hlstd{( Y[}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{,] )}
+\end{alltt}
+\begin{verbatim}
+## [1]  63 156
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\section{Architectures}
+
+In addition to fully-connected Recurrent Neural Networks, \code{rnn}
+also supports Long Short-Term Memory (LSTM) Recurrent Neural Networks
+\citep{hochreiter1997long} 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{trainr}\hlstd{(Y, X,} \hlkwc{network_type}\hlstd{=}\hlstr{"lstm"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+as well as Gated Recurrent Unit \citep{cho2014learning} architecture.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{trainr}\hlstd{(Y, X,} \hlkwc{network_type}\hlstd{=}\hlstr{"gru"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\section{Miscellaneous Functions}
+
+In addition to the main user APIs \code{trainr()} and \code{predictr()},
+the underlying functions for the above mentioned neural network architectures,
+the \code{rnn} package includes several other functions. Including
+the \code{int2bin()} and \code{bin2int()} which were used above,
+these funtions are intended to ease conversion from decimal to binary
+notation and visa versa, especially for didacting purposes.
+
+The \code{run.rnn\_demo()} and \code{run.finance\_demo()} each launch
+a \href{http://shiny.rstudio.com/}{Shiny app} that demonstate usage
+of \code{rnn} functionality, the Shiny package needs to be installed
+in order to run these apps locally\footnote{The Shiny package can be installed using: \code{install.packages('shiny')}}.
+The two demos are also available online at \href{http://shiny.qua.st/rnn}{http://shiny.qua.st/rnn}
+and \href{http://shiny.qua.st/finance}{http://shiny.qua.st/finance}
+respectively.
+
+\nocite{hebb2005organization}
+\nocite{linnainmaa1970representation}
+\nocite{mcculloch1943logical}
+\nocite{minsky1952neural}
+\nocite{rosenblatt1958perceptron}
+\nocite{rumelhart1986learning}
+\nocite{werbos1974beyond}
+\nocite{werbos1988generalization}
+\nocite{widrow1960adaptive}
+
+\bibliographystyle{plainnat}
+\bibliography{rnn-article}
+
+\appendix
+
+\section{Simplied RNN code}
+
+\label{sec:Simplied-RNN-code}
+
+Decimal to binary conversion.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{i2b} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{integer}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{8}\hlstd{)}
+  \hlkwd{as.numeric}\hlstd{(}\hlkwd{intToBits}\hlstd{(integer))[}\hlnum{1}\hlopt{:}\hlstd{length]}
+
+\hlcom{# apply to entire vectors}
+\hlstd{int2bin} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{integer}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{8}\hlstd{)}
+  \hlkwd{t}\hlstd{(}\hlkwd{sapply}\hlstd{(integer, i2b,} \hlkwc{length}\hlstd{=length))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Training data generation.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# set training data length}
+\hlstd{training_data_size} \hlkwb{=} \hlnum{20000}
+
+\hlcom{# create sample inputs }
+\hlstd{X1} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{127}\hlstd{, training_data_size,} \hlkwc{replace}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlstd{X2} \hlkwb{=} \hlkwd{sample}\hlstd{(}\hlnum{0}\hlopt{:}\hlnum{127}\hlstd{, training_data_size,} \hlkwc{replace}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+
+\hlcom{# create sample output }
+\hlstd{Y} \hlkwb{<-} \hlstd{X1} \hlopt{+} \hlstd{X2}
+
+\hlcom{# convert to binary }
+\hlstd{X1} \hlkwb{<-} \hlkwd{int2bin}\hlstd{(X1)}
+\hlstd{X2} \hlkwb{<-} \hlkwd{int2bin}\hlstd{(X2)}
+\hlstd{Y}  \hlkwb{<-} \hlkwd{int2bin}\hlstd{(Y)}
+
+\hlcom{# create 3d array: dim 1: samples; dim 2: time; dim 3: variables }
+\hlstd{X} \hlkwb{<-} \hlkwd{array}\hlstd{(} \hlkwd{c}\hlstd{(X1,X2),} \hlkwc{dim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlkwd{dim}\hlstd{(X1),}\hlnum{2}\hlstd{) )}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Sigmoid and derivative functions.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{sigmoid} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)}
+             \hlnum{1} \hlopt{/} \hlstd{(} \hlnum{1}\hlopt{+}\hlkwd{exp}\hlstd{(}\hlopt{-}\hlstd{x) )}
+
+\hlstd{sig_to_der} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)}
+                \hlstd{x}\hlopt{*}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{x)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Set the hyperparameters.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{binary_dim} \hlkwb{=} \hlnum{8}
+\hlstd{alpha}      \hlkwb{=} \hlnum{0.5}
+\hlstd{input_dim}  \hlkwb{=} \hlnum{2}
+\hlstd{hidden_dim} \hlkwb{=} \hlnum{6}
+\hlstd{output_dim} \hlkwb{=} \hlnum{1}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Initialise the weights.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# initialize weights randomly between -1 and 1, with mean 0}
+\hlstd{weights_0} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlkwc{n} \hlstd{= input_dim} \hlopt{*}\hlstd{hidden_dim,} \hlkwc{min}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{max}\hlstd{=}\hlnum{1}\hlstd{),}
+                   \hlkwc{nrow}\hlstd{=input_dim,}
+                   \hlkwc{ncol}\hlstd{=hidden_dim )}
+\hlstd{weights_h} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlkwc{n} \hlstd{= hidden_dim}\hlopt{*}\hlstd{hidden_dim,} \hlkwc{min}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{max}\hlstd{=}\hlnum{1}\hlstd{),}
+                   \hlkwc{nrow}\hlstd{=hidden_dim,}
+                   \hlkwc{ncol}\hlstd{=hidden_dim )}
+\hlstd{weights_1} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlkwc{n} \hlstd{= hidden_dim}\hlopt{*}\hlstd{output_dim,} \hlkwc{min}\hlstd{=}\hlopt{-}\hlnum{1}\hlstd{,} \hlkwc{max}\hlstd{=}\hlnum{1}\hlstd{),}
+                   \hlkwc{nrow}\hlstd{=hidden_dim,}
+                   \hlkwc{ncol}\hlstd{=output_dim )}
+
+\hlcom{# create matrices to store updates, to be used in backpropagation}
+\hlstd{weights_0_update} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlnum{0}\hlstd{,} \hlkwc{nrow} \hlstd{= input_dim,}  \hlkwc{ncol} \hlstd{= hidden_dim)}
+\hlstd{weights_h_update} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlnum{0}\hlstd{,} \hlkwc{nrow} \hlstd{= hidden_dim,} \hlkwc{ncol} \hlstd{= hidden_dim)}
+\hlstd{weights_1_update} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlnum{0}\hlstd{,} \hlkwc{nrow} \hlstd{= hidden_dim,} \hlkwc{ncol} \hlstd{= output_dim)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Train the model.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# training logic}
+\hlkwa{for} \hlstd{(j} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{training_data_size) \{}
+    \hlcom{# select data}
+    \hlstd{a} \hlkwb{=} \hlstd{X1[j,]}
+    \hlstd{b} \hlkwb{=} \hlstd{X2[j,]}
+
+    \hlcom{# select true answer}
+    \hlstd{c} \hlkwb{=} \hlstd{Y[j,]}
+
+    \hlcom{# where we'll store our best guesss (binary encoded)}
+    \hlstd{d} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlnum{0}\hlstd{,} \hlkwc{nrow} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{ncol} \hlstd{= binary_dim)}
+
+    \hlstd{overallError} \hlkwb{=} \hlnum{0}
+
+    \hlstd{layer_2_deltas} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlnum{0}\hlstd{)}
+    \hlstd{layer_1_values} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlnum{0}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{ncol} \hlstd{= hidden_dim)}
+
+    \hlcom{# moving along the positions in the binary encoding}
+    \hlkwa{for} \hlstd{(position} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{binary_dim) \{}
+        \hlcom{# generate input and output}
+        \hlstd{X} \hlkwb{=} \hlkwd{cbind}\hlstd{( a[position], b[position] )}
+        \hlstd{y} \hlkwb{=} \hlstd{c[position]}
+
+        \hlcom{# hidden layer}
+        \hlstd{layer_1} \hlkwb{=} \hlkwd{sigmoid}\hlstd{( (X}\hlopt{%*%}\hlstd{weights_0)} \hlopt{+}
+                    \hlstd{(layer_1_values[}\hlkwd{dim}\hlstd{(layer_1_values)[}\hlnum{1}\hlstd{],]}
+                                               \hlopt{%*%} \hlstd{weights_h) )}
+
+        \hlcom{# output layer}
+        \hlstd{layer_2} \hlkwb{=} \hlkwd{sigmoid}\hlstd{(layer_1} \hlopt{%*%} \hlstd{weights_1)}
+
+        \hlcom{# did we miss?... if so, by how much?}
+        \hlstd{layer_2_error} \hlkwb{=} \hlstd{y} \hlopt{-} \hlstd{layer_2}
+        \hlstd{layer_2_deltas} \hlkwb{=} \hlkwd{rbind}\hlstd{(layer_2_deltas,}
+                               \hlstd{layer_2_error} \hlopt{*} \hlkwd{sig_to_der}\hlstd{(layer_2))}
+        \hlstd{overallError} \hlkwb{=} \hlstd{overallError} \hlopt{+} \hlkwd{abs}\hlstd{(layer_2_error)}
+
+        \hlcom{# decode estimate so we can print it out}
+        \hlstd{d[position]} \hlkwb{=} \hlkwd{round}\hlstd{(layer_2)}
+
+        \hlcom{# store hidden layer}
+        \hlstd{layer_1_values} \hlkwb{=} \hlkwd{rbind}\hlstd{(layer_1_values, layer_1)}
+    \hlstd{\}}
+
+    \hlstd{future_layer_1_delta} \hlkwb{=} \hlkwd{matrix}\hlstd{(}\hlnum{0}\hlstd{,} \hlkwc{nrow} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{ncol} \hlstd{= hidden_dim)}
+
+    \hlkwa{for} \hlstd{(position} \hlkwa{in} \hlstd{binary_dim}\hlopt{:}\hlnum{1}\hlstd{) \{}
+        \hlstd{X} \hlkwb{=} \hlkwd{cbind}\hlstd{(a[position], b[position])}
+        \hlstd{layer_1} \hlkwb{=} \hlstd{layer_1_values[}\hlkwd{dim}\hlstd{(layer_1_values)[}\hlnum{1}\hlstd{]}
+                                      \hlopt{-} \hlstd{(binary_dim}\hlopt{-}\hlstd{position),]}
+        \hlstd{prev_layer_1} \hlkwb{=} \hlstd{layer_1_values[}\hlkwd{dim}\hlstd{(layer_1_values)[}\hlnum{1}\hlstd{]}
+                                      \hlopt{-} \hlstd{( (binary_dim}\hlopt{-}\hlstd{position)}\hlopt{+}\hlnum{1} \hlstd{),]}
+
+        \hlcom{# error at output layer}
+        \hlstd{layer_2_delta} \hlkwb{=} \hlstd{layer_2_deltas[}\hlkwd{dim}\hlstd{(layer_2_deltas)[}\hlnum{1}\hlstd{]} \hlopt{-}
+                                           \hlstd{(binary_dim}\hlopt{-}\hlstd{position),]}
+        \hlcom{# error at hidden layer}
+        \hlstd{layer_1_delta} \hlkwb{=} \hlstd{(future_layer_1_delta} \hlopt{%*%} \hlkwd{t}\hlstd{(weights_h)} \hlopt{+}
+          \hlstd{layer_2_delta} \hlopt{%*%} \hlkwd{t}\hlstd{(weights_1))} \hlopt{*} \hlkwd{sig_to_der}\hlstd{(layer_1)}
+
+        \hlcom{# let's update all our weights so we can try again}
+        \hlstd{weights_1_update} \hlkwb{=} \hlstd{weights_1_update} \hlopt{+} \hlkwd{matrix}\hlstd{(layer_1)} \hlopt{%*%}
+                                                      \hlstd{layer_2_delta}
+        \hlstd{weights_h_update} \hlkwb{=} \hlstd{weights_h_update} \hlopt{+} \hlkwd{matrix}\hlstd{(prev_layer_1)} \hlopt{%*%}
+                                                      \hlstd{layer_1_delta}
+        \hlstd{weights_0_update} \hlkwb{=} \hlstd{weights_0_update} \hlopt{+} \hlkwd{t}\hlstd{(X)} \hlopt{%*%} \hlstd{layer_1_delta}
+
+        \hlstd{future_layer_1_delta} \hlkwb{=} \hlstd{layer_1_delta}
+    \hlstd{\}}
+
+    \hlstd{weights_0} \hlkwb{=} \hlstd{weights_0} \hlopt{+} \hlstd{( weights_0_update} \hlopt{*} \hlstd{alpha )}
+    \hlstd{weights_1} \hlkwb{=} \hlstd{weights_1} \hlopt{+} \hlstd{( weights_1_update} \hlopt{*} \hlstd{alpha )}
+    \hlstd{weights_h} \hlkwb{=} \hlstd{weights_h} \hlopt{+} \hlstd{( weights_h_update} \hlopt{*} \hlstd{alpha )}
+
+    \hlstd{weights_0_update} \hlkwb{=} \hlstd{weights_0_update} \hlopt{*} \hlnum{0}
+    \hlstd{weights_1_update} \hlkwb{=} \hlstd{weights_1_update} \hlopt{*} \hlnum{0}
+    \hlstd{weights_h_update} \hlkwb{=} \hlstd{weights_h_update} \hlopt{*} \hlnum{0}
+
+    \hlkwa{if}\hlstd{(j}\hlopt{%%}\hlstd{(training_data_size}\hlopt{/}\hlnum{5}\hlstd{)} \hlopt{==} \hlnum{0}\hlstd{)}
+        \hlkwd{print}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Error:"}\hlstd{, overallError))}
+
+\hlstd{\}}
+\end{alltt}
+\begin{verbatim}
+## [1] "Error: 2.70103303147726"
+## [1] "Error: 0.273505476217851"
+## [1] "Error: 0.158342968262358"
+## [1] "Error: 0.139704536271053"
+## [1] "Error: 0.177159616857211"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{document}
