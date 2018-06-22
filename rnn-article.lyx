@@ -147,10 +147,20 @@ R
 
 \begin_layout Author
 Bastiaan Quast
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Research supported by the Swiss National Science Foundation
+\end_layout
+
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
-The Graduate Institute 
+International Telecommuniation Union 
 \begin_inset ERT
 status open
 
@@ -216,7 +226,7 @@ R
 status open
 
 \begin_layout Plain Layout
-fix 
+mention website: 
 \begin_inset CommandInset href
 LatexCommand href
 target "http://qua.st/rnn"
@@ -673,9 +683,17 @@ help('trainr')
 \end_layout
 
 \begin_layout Standard
-Recurrent Neural Networks have the ability to learn bit-by-bit binary addition
- (including carrying over) with as little as 3 hidden nodes, whereas feed-forwar
-d neural networks would need many more.
+Recurrent Neural Networks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "werbos1988generalization"
+literal "false"
+
+\end_inset
+
+ have the ability to learn bit-by-bit binary addition (including carrying
+ over) with as little as 3 hidden nodes, whereas feed-forward neural networks
+ would need many more.
 \end_layout
 
 \begin_layout Standard
@@ -928,8 +946,104 @@ m1 <- trainr(Y=Y,
              hidden_dim     = 6   )
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The forward and back propagation algorithms used are relatively straightforward
+ and can be printed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
 \begin_layout Plain Layout
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+forward-prop, eval=FALSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+rnn:::predict_rnn
+\end_layout
+
+\begin_layout Plain Layout
+
+rnn:::backprop_rnn
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A simplied version of the rnn algorithm used is presented in the vignette
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+basic_rnn
+\end_layout
+
+\end_inset
+
+, also available on CRAN at 
+\begin_inset CommandInset href
+LatexCommand href
+target "https://cran.r-project.org/package=rnn/vignettes/basic_rnn.html"
+
+\end_inset
+
+, it is also included in Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Simplied-RNN-code"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+vignette, eval=FALSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+vignette('basic_rnn')
 \end_layout
 
 \end_inset
@@ -1620,7 +1734,7 @@ gru
 \end_layout
 
 \begin_layout Section
-Miscellaneous
+Miscellaneous Functions
 \end_layout
 
 \begin_layout Standard
@@ -1759,77 +1873,72 @@ target "http://shiny.qua.st/finance"
  respectively.
 \end_layout
 
-\begin_layout Section*
-Acknowledgments
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+nocite{hebb2005organization}
 \end_layout
 
-\begin_layout Standard
-Bastiaan Quast gratefully acknowledges support from the Swiss National Science
- Foundation under grant # (2013-2015).
- Dimitri Fichou gratefully acknowledges support ...
+\begin_layout Plain Layout
+
+
+\backslash
+nocite{linnainmaa1970representation}
 \end_layout
 
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand citep
-key "hebb2005organization"
-literal "false"
-
-\end_inset
+\begin_layout Plain Layout
 
 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "linnainmaa1970representation"
-literal "false"
+\backslash
+nocite{mcculloch1943logical}
+\end_layout
 
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "mcculloch1943logical"
-literal "false"
-
-\end_inset
+\begin_layout Plain Layout
 
 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "minsky1952neural"
-literal "false"
+\backslash
+nocite{minsky1952neural}
+\end_layout
 
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "rosenblatt1958perceptron"
-literal "false"
-
-\end_inset
+\begin_layout Plain Layout
 
 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "rumelhart1986learning"
-literal "false"
+\backslash
+nocite{rosenblatt1958perceptron}
+\end_layout
 
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "werbos1974beyond"
-literal "false"
-
-\end_inset
+\begin_layout Plain Layout
 
 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "widrow1960adaptive"
-literal "false"
+\backslash
+nocite{rumelhart1986learning}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+nocite{werbos1974beyond}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+nocite{werbos1988generalization}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+nocite{widrow1960adaptive}
+\end_layout
 
 \end_inset
 
@@ -1842,6 +1951,848 @@ LatexCommand bibtex
 btprint "btPrintCited"
 bibfiles "rnn-article"
 options "plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+appendix
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Simplied RNN code
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Simplied-RNN-code"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Decimal to binary conversion.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+i2b, cache=TRUE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+i2b <- function(integer, length=8)
+\end_layout
+
+\begin_layout Plain Layout
+
+  as.numeric(intToBits(integer))[1:length]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# apply to entire vectors
+\end_layout
+
+\begin_layout Plain Layout
+
+int2bin <- function(integer, length=8)
+\end_layout
+
+\begin_layout Plain Layout
+
+  t(sapply(integer, i2b, length=length)) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Training data generation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+training_data_generation, cache=TRUE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# set training data length
+\end_layout
+
+\begin_layout Plain Layout
+
+training_data_size = 20000
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# create sample inputs 
+\end_layout
+
+\begin_layout Plain Layout
+
+X1 = sample(0:127, training_data_size, replace=TRUE) 
+\end_layout
+
+\begin_layout Plain Layout
+
+X2 = sample(0:127, training_data_size, replace=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# create sample output 
+\end_layout
+
+\begin_layout Plain Layout
+
+Y <- X1 + X2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# convert to binary 
+\end_layout
+
+\begin_layout Plain Layout
+
+X1 <- int2bin(X1) 
+\end_layout
+
+\begin_layout Plain Layout
+
+X2 <- int2bin(X2) 
+\end_layout
+
+\begin_layout Plain Layout
+
+Y  <- int2bin(Y)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# create 3d array: dim 1: samples; dim 2: time; dim 3: variables 
+\end_layout
+
+\begin_layout Plain Layout
+
+X <- array( c(X1,X2), dim=c(dim(X1),2) )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sigmoid and derivative functions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+sig_and_der, cache=TRUE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+sigmoid <- function(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+             1 / ( 1+exp(-x) )
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+sig_to_der <- function(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+                x*(1-x)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Set the hyperparameters.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+hyperparameters, cache=TRUE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+binary_dim = 8 
+\end_layout
+
+\begin_layout Plain Layout
+
+alpha      = 0.5 
+\end_layout
+
+\begin_layout Plain Layout
+
+input_dim  = 2 
+\end_layout
+
+\begin_layout Plain Layout
+
+hidden_dim = 6 
+\end_layout
+
+\begin_layout Plain Layout
+
+output_dim = 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Initialise the weights.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+init_weights_rnn, cache=TRUE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# initialize weights randomly between -1 and 1, with mean 0
+\end_layout
+
+\begin_layout Plain Layout
+
+weights_0 = matrix(runif(n = input_dim *hidden_dim, min=-1, max=1),
+\end_layout
+
+\begin_layout Plain Layout
+
+                   nrow=input_dim,
+\end_layout
+
+\begin_layout Plain Layout
+
+                   ncol=hidden_dim ) 
+\end_layout
+
+\begin_layout Plain Layout
+
+weights_h = matrix(runif(n = hidden_dim*hidden_dim, min=-1, max=1),
+\end_layout
+
+\begin_layout Plain Layout
+
+                   nrow=hidden_dim,
+\end_layout
+
+\begin_layout Plain Layout
+
+                   ncol=hidden_dim )
+\end_layout
+
+\begin_layout Plain Layout
+
+weights_1 = matrix(runif(n = hidden_dim*output_dim, min=-1, max=1),
+\end_layout
+
+\begin_layout Plain Layout
+
+                   nrow=hidden_dim,
+\end_layout
+
+\begin_layout Plain Layout
+
+                   ncol=output_dim ) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# create matrices to store updates, to be used in backpropagation
+\end_layout
+
+\begin_layout Plain Layout
+
+weights_0_update = matrix(0, nrow = input_dim,  ncol = hidden_dim) 
+\end_layout
+
+\begin_layout Plain Layout
+
+weights_h_update = matrix(0, nrow = hidden_dim, ncol = hidden_dim)
+\end_layout
+
+\begin_layout Plain Layout
+
+weights_1_update = matrix(0, nrow = hidden_dim, ncol = output_dim)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Train the model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+train_rnn, cache=TRUE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+# training logic
+\end_layout
+
+\begin_layout Plain Layout
+
+for (j in 1:training_data_size) {
+\end_layout
+
+\begin_layout Plain Layout
+
+    # select data
+\end_layout
+
+\begin_layout Plain Layout
+
+    a = X1[j,]
+\end_layout
+
+\begin_layout Plain Layout
+
+    b = X2[j,]
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+    # select true answer
+\end_layout
+
+\begin_layout Plain Layout
+
+    c = Y[j,]
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+    # where we'll store our best guesss (binary encoded)
+\end_layout
+
+\begin_layout Plain Layout
+
+    d = matrix(0, nrow = 1, ncol = binary_dim)
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+    overallError = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+    layer_2_deltas = matrix(0)
+\end_layout
+
+\begin_layout Plain Layout
+
+    layer_1_values = matrix(0, nrow=1, ncol = hidden_dim)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    # moving along the positions in the binary encoding
+\end_layout
+
+\begin_layout Plain Layout
+
+    for (position in 1:binary_dim) {
+\end_layout
+
+\begin_layout Plain Layout
+
+        # generate input and output
+\end_layout
+
+\begin_layout Plain Layout
+
+        X = cbind( a[position], b[position] )
+\end_layout
+
+\begin_layout Plain Layout
+
+        y = c[position]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+        # hidden layer
+\end_layout
+
+\begin_layout Plain Layout
+
+        layer_1 = sigmoid( (X%*%weights_0) +
+\end_layout
+
+\begin_layout Plain Layout
+
+                    (layer_1_values[dim(layer_1_values)[1],]
+\end_layout
+
+\begin_layout Plain Layout
+
+                                               %*% weights_h) )
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+        # output layer
+\end_layout
+
+\begin_layout Plain Layout
+
+        layer_2 = sigmoid(layer_1 %*% weights_1)
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+        # did we miss?...
+ if so, by how much?
+\end_layout
+
+\begin_layout Plain Layout
+
+        layer_2_error = y - layer_2
+\end_layout
+
+\begin_layout Plain Layout
+
+        layer_2_deltas = rbind(layer_2_deltas,
+\end_layout
+
+\begin_layout Plain Layout
+
+                               layer_2_error * sig_to_der(layer_2))
+\end_layout
+
+\begin_layout Plain Layout
+
+        overallError = overallError + abs(layer_2_error)
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+        # decode estimate so we can print it out
+\end_layout
+
+\begin_layout Plain Layout
+
+        d[position] = round(layer_2)
+\end_layout
+
+\begin_layout Plain Layout
+
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+        # store hidden layer
+\end_layout
+
+\begin_layout Plain Layout
+
+        layer_1_values = rbind(layer_1_values, layer_1)
+\end_layout
+
+\begin_layout Plain Layout
+
+    }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    future_layer_1_delta = matrix(0, nrow = 1, ncol = hidden_dim)
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+    for (position in binary_dim:1) {
+\end_layout
+
+\begin_layout Plain Layout
+
+        X = cbind(a[position], b[position])
+\end_layout
+
+\begin_layout Plain Layout
+
+        layer_1 = layer_1_values[dim(layer_1_values)[1]
+\end_layout
+
+\begin_layout Plain Layout
+
+                                      - (binary_dim-position),]
+\end_layout
+
+\begin_layout Plain Layout
+
+        prev_layer_1 = layer_1_values[dim(layer_1_values)[1]
+\end_layout
+
+\begin_layout Plain Layout
+
+                                      - ( (binary_dim-position)+1 ),]
+\end_layout
+
+\begin_layout Plain Layout
+
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+        # error at output layer
+\end_layout
+
+\begin_layout Plain Layout
+
+        layer_2_delta = layer_2_deltas[dim(layer_2_deltas)[1] - 
+\end_layout
+
+\begin_layout Plain Layout
+
+                                           (binary_dim-position),]
+\end_layout
+
+\begin_layout Plain Layout
+
+        # error at hidden layer
+\end_layout
+
+\begin_layout Plain Layout
+
+        layer_1_delta = (future_layer_1_delta %*% t(weights_h) +
+\end_layout
+
+\begin_layout Plain Layout
+
+          layer_2_delta %*% t(weights_1)) * sig_to_der(layer_1)
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+        # let's update all our weights so we can try again
+\end_layout
+
+\begin_layout Plain Layout
+
+        weights_1_update = weights_1_update + matrix(layer_1) %*% 
+\end_layout
+
+\begin_layout Plain Layout
+
+                                                      layer_2_delta
+\end_layout
+
+\begin_layout Plain Layout
+
+        weights_h_update = weights_h_update + matrix(prev_layer_1) %*%
+\end_layout
+
+\begin_layout Plain Layout
+
+                                                      layer_1_delta
+\end_layout
+
+\begin_layout Plain Layout
+
+        weights_0_update = weights_0_update + t(X) %*% layer_1_delta
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+        future_layer_1_delta = layer_1_delta
+\end_layout
+
+\begin_layout Plain Layout
+
+    }
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+    weights_0 = weights_0 + ( weights_0_update * alpha )
+\end_layout
+
+\begin_layout Plain Layout
+
+    weights_1 = weights_1 + ( weights_1_update * alpha )
+\end_layout
+
+\begin_layout Plain Layout
+
+    weights_h = weights_h + ( weights_h_update * alpha )
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+    weights_0_update = weights_0_update * 0
+\end_layout
+
+\begin_layout Plain Layout
+
+    weights_1_update = weights_1_update * 0
+\end_layout
+
+\begin_layout Plain Layout
+
+    weights_h_update = weights_h_update * 0
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+    if(j%%(training_data_size/5) == 0)
+\end_layout
+
+\begin_layout Plain Layout
+
+        print(paste("Error:", overallError))    
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
