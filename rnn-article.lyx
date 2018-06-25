@@ -1734,6 +1734,81 @@ gru
 \end_layout
 
 \begin_layout Section
+Model object
+\end_layout
+
+\begin_layout Standard
+The trainr function returns a model object which is an S3 list type.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+object
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+typeof(m1)
+\end_layout
+
+\begin_layout Plain Layout
+
+class(m1)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The a model object contains the following objects.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex Chunk
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+object-content
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ls(m1)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Miscellaneous Functions
 \end_layout
 
